@@ -1,0 +1,7 @@
+Action can only be performed if the 
+#if ($closed)
+ <b>all issue's subtasks are closed<\b>
+#else
+ <b>issue has at least one opened subtask<\b>
+#end
+ or haven't them at all
