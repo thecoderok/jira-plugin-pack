@@ -22,11 +22,7 @@ public class IssueHasUnlosedSubtasksFactory extends AbstractWorkflowPluginFactor
     @Override
     protected void getVelocityParamsForInput(Map velocityParams)
     {
-        Map conditions = new ListOrderedMap();
-        conditions.put(CLOSED_KEY, "All subtasks are closed");
-        conditions.put(UNCLOSED_KEY, "Issue has opened subtask");
-
-        velocityParams.put("conditions", conditions);
+        return;
     }
 
     @Override
@@ -39,20 +35,12 @@ public class IssueHasUnlosedSubtasksFactory extends AbstractWorkflowPluginFactor
     @Override
     protected void getVelocityParamsForView(Map velocityParams, AbstractDescriptor descriptor)
     {
-        if(!(descriptor instanceof ConditionDescriptor))
-        {
-            throw new IllegalArgumentException("Descriptor must be a ConditionDescriptor.");
-        } else
-        {
-            ConditionDescriptor conditionDescriptor = (ConditionDescriptor)descriptor;
-            velocityParams.put("selected", conditionDescriptor.getArgs().get("condition"));
-            return;
-        }
+        return;
     }
 
     public Map getDescriptorParams(Map conditionParams) {
         Map args = new ListOrderedMap();
-        args.put("condition", extractSingleParam(conditionParams, "conditions"));
+        //args.put("condition", extractSingleParam(conditionParams, "conditions"));
         return args;
     }
 
