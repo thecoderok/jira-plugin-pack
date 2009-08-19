@@ -4,6 +4,6 @@
     </td>
     <td bgcolor="ffffff" nowrap>
         #selectMapSelected ("condition" ${conditions} ${selected})
-        <br><font size="1">Condition will always return true if issue hasn't any subtask</font>
+        <br><font size="1">The condition to check</font>
     </td>
 </tr>

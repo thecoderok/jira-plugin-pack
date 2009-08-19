@@ -6,13 +6,15 @@
         <vendor name="Ganzha Vitaliy" url="http://bytes.org.ua"/>
     </plugin-info>
     <!--Conditions-->
-    <workflow-condition key="issue-has-unclosed-subtasks" 
-                        name="Issue has unclosed subtask "
+    <workflow-condition key="issue-hasn't-unclosed-subtasks"
+                        name="Issue hasn't unclosed subtask"
                         class="com.gsoft.workflow.conditions.factories.IssueHasUnlosedSubtasksFactory">
-        <description key="admin.workflow.condition.isuseringroup">Condition to allow to execute transition only if all issue's subtasks is closed (or not)</description>
+        <description key="admin.workflow.condition.isuseringroup">Condition to allow to execute transition only if all issue's subtasks is closed</description>
         <condition-class>com.gsoft.workflow.conditions.IssueHasUnlosedSubtasks</condition-class>
-        <resource type="velocity" name="view" location="templates/workflow/conditions/issue-has-unclosed-subtasks-view.vm"/>
+        <resource type="velocity" name="view" location="templates/conditions/issue-has-unclosed-subtasks-view.vm"/>
+        <!---
         <resource type="velocity" name="input-parameters" location="templates/conditions/issue-has-unclosed-subtasks-edit.vm"/>
         <resource type="velocity" name="edit-parameters" location="templates/conditions/issue-has-unclosed-subtasks-edit.vm"/>
+        -->
     </workflow-condition>
 </atlassian-plugin>
