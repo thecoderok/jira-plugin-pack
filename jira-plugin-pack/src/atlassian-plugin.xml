@@ -17,4 +17,24 @@
         <resource type="velocity" name="edit-parameters" location="templates/conditions/issue-has-unclosed-subtasks-edit.vm"/>
         -->
     </workflow-condition>
+    <!--Post Function-->
+    <workflow-function key="assign-to-parent-issue-assignee-function"
+               		name="Assign to parent issue assignee"
+               		class="com.gsoft.workflow.functions.factories.AssignToParentIssueAssigneePluginFactory">
+		<description>
+			This issue (sub-task) will be assigned to the parent issue assignee
+		</description>
+		<function-class>
+			com.gsoft.workflow.functions.AssignToParentIssueAssignee
+		</function-class>
+		<orderable>true</orderable>
+		<unique>false</unique>
+		<deletable>true</deletable>
+		<editable>true</editable>
+		<resource type="velocity" name="view"	location="templates/functions/assign-to-parent-assignee-function-view.vm" />
+		<!--
+                <resource type="velocity" name="input-parameters"	location="templates/functions/inp-params-assign-from-customfield-function.vm" />
+		<resource type="velocity" name="edit-parameters"	location="templates/functions/inp-params-assign-from-customfield-function.vm" />
+                -->
+	</workflow-function>
 </atlassian-plugin>
