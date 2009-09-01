@@ -42,8 +42,8 @@ public class regularExpressionValidator extends GenericValidator{
         if (!found)
         {
             this.setExceptionMessage(field, 
-                                     "The value don't mutch for pattern "+ pattern,
-                                     "The value of field " + field.getName() +" don't mutch for pattern "+ pattern
+                                     "The value don't match for pattern "+ pattern,
+                                     "The value of field " + field.getName() +" don't match for pattern "+ pattern
                                      );
         }
     }
