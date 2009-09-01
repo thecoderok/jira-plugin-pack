@@ -37,4 +37,17 @@
 		<resource type="velocity" name="edit-parameters"	location="templates/functions/inp-params-assign-from-customfield-function.vm" />
                 -->
 	</workflow-function>
+        <!--Validators-->
+        <workflow-validator key="regular-expression-match-validator" name="Regular Expression Match Validator"
+		class="com.gsoft.workflow.validators.factories.RegularExpressionValidatorFactory">
+		<description>The value of the field must mutch to the specified pattern (Supports Perl-style patterns - http://www.perl.com/doc/manual/html/pod/perlre.html) </description>
+
+		<validator-class>
+			com.gsoft.workflow.validators.regularExpressionValidator
+		</validator-class>
+
+		<resource type="velocity" name="view" location="templates/validators/matchregexp-validator-view.vm"/>
+		<resource type="velocity" name="input-parameters" location="templates/validators/matchregexp-validator-edit.vm"/>
+		<resource type="velocity" name="edit-parameters" location="templates/validators/matchregexp-validator-edit.vm"/>
+	</workflow-validator>  
 </atlassian-plugin>

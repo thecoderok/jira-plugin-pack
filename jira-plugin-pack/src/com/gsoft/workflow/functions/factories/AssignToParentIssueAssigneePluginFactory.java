@@ -19,21 +19,21 @@ public class AssignToParentIssueAssigneePluginFactory extends AbstractWorkflowPl
         WorkflowPluginFunctionFactory{
 
     @Override
-    protected void getVelocityParamsForInput(Map arg0) {
+    protected void getVelocityParamsForInput(Map velocityParams) {
         return;
     }
 
     @Override
-    protected void getVelocityParamsForEdit(Map arg0, AbstractDescriptor arg1) {
+    protected void getVelocityParamsForEdit(Map velocityParams, AbstractDescriptor descriptor) {
         return;
     }
 
     @Override
-    protected void getVelocityParamsForView(Map arg0, AbstractDescriptor arg1) {
+    protected void getVelocityParamsForView(Map velocityParams, AbstractDescriptor descriptor) {
         return;
     }
 
-    public Map getDescriptorParams(Map arg0) {
+    public Map getDescriptorParams(Map velocityParams) {
         return new HashMap();
     }
 
