@@ -40,7 +40,6 @@ public class IssueHasUnlosedSubtasksFactory extends AbstractWorkflowPluginFactor
 
     public Map getDescriptorParams(Map conditionParams) {
         Map args = new ListOrderedMap();
-        //args.put("condition", extractSingleParam(conditionParams, "conditions"));
         return args;
     }
 
