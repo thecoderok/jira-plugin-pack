@@ -7,28 +7,25 @@ package com.gsoft.workflow.conditions.factories;
 import com.atlassian.core.user.GroupUtils;
 import com.atlassian.jira.plugin.workflow.AbstractWorkflowPluginFactory;
 import com.atlassian.jira.plugin.workflow.WorkflowPluginConditionFactory;
+import com.googlecode.jsu.util.CommonPluginUtils;
 import com.opensymphony.user.Group;
 import com.opensymphony.workflow.loader.AbstractDescriptor;
 import com.opensymphony.workflow.loader.ConditionDescriptor;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.apache.commons.collections.map.ListOrderedMap;
 
-
-public class WorkflowIsUserInGroupConditionFactoryImpl extends AbstractWorkflowPluginFactory
+public class UserInFieldFactoryImpl extends AbstractWorkflowPluginFactory
     implements WorkflowPluginConditionFactory{
 
-    public WorkflowIsUserInGroupConditionFactoryImpl(){}
-    protected void getVelocityParamsForInput(Map velocityParams)
-    {
-        Map groupMap = new ListOrderedMap();
-        Collection groups = GroupUtils.getGroups();
-        Group group;
-        for(Iterator iterator = groups.iterator(); iterator.hasNext(); groupMap.put(group.getName(), group.getName()))
-            group = (Group)iterator.next();
+    @Override
+    protected void getVelocityParamsForInput(Map velocityParams) {
+        List fields = CommonPluginUtils.getAllEditableFields();
 
-        velocityParams.put("groups", groupMap);
+        velocityParams.put("fieldList", fields);
 
         Map compareMap = new ListOrderedMap();
         compareMap.put("in","in");
@@ -36,14 +33,14 @@ public class WorkflowIsUserInGroupConditionFactoryImpl extends AbstractWorkflowP
         velocityParams.put("comparetypes", compareMap);
     }
 
-    protected void getVelocityParamsForEdit(Map velocityParams, AbstractDescriptor descriptor)
-    {
+    @Override
+    protected void getVelocityParamsForEdit(Map velocityParams, AbstractDescriptor descriptor) {
         getVelocityParamsForInput(velocityParams);
         getVelocityParamsForView(velocityParams, descriptor);
     }
 
-    protected void getVelocityParamsForView(Map velocityParams, AbstractDescriptor descriptor)
-    {
+    @Override
+    protected void getVelocityParamsForView(Map velocityParams, AbstractDescriptor descriptor) {
         if(!(descriptor instanceof ConditionDescriptor))
         {
             throw new IllegalArgumentException("Descriptor must be a ConditionDescriptor.");
@@ -51,16 +48,16 @@ public class WorkflowIsUserInGroupConditionFactoryImpl extends AbstractWorkflowP
         {
             ConditionDescriptor conditionDescriptor = (ConditionDescriptor)descriptor;
             velocityParams.put("comparetype", conditionDescriptor.getArgs().get("comparetype"));
-            velocityParams.put("group", conditionDescriptor.getArgs().get("group"));
+            velocityParams.put("userField", conditionDescriptor.getArgs().get("userField"));
             return;
         }
     }
 
-    public Map getDescriptorParams(Map conditionParams)
-    {
+    public Map getDescriptorParams(Map conditionParams) {
         Map args = new ListOrderedMap();
-        args.put("group", extractSingleParam(conditionParams, "group"));
+        args.put("userField", extractSingleParam(conditionParams, "userField"));
         args.put("comparetype",extractSingleParam(conditionParams, "comparetype"));
         return args;
     }
+
 }
