@@ -2,7 +2,6 @@ package com.gsoft.workflow.conditions;
 
 import com.atlassian.core.user.UserUtils;
 import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.Field;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.module.propertyset.PropertySet;
@@ -15,14 +14,15 @@ import com.opensymphony.workflow.WorkflowException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import org.apache.log4j.Category;
 
 /**
  *
  * @author Ganzha Vitaliy
  */
 public class UserInFieldCondition implements Condition{
+
+    //private static org.apache.log4j.Category log = org.apache.log4j.Category.getInstance(UserInFieldCondition.class);
 
     public boolean passesCondition(Map transientVars, Map args, PropertySet ps) throws WorkflowException {
 
@@ -51,6 +51,9 @@ public class UserInFieldCondition implements Condition{
                 throw (new WorkflowException("Field not found with key "+fieldKey));
 
             Object object = WorkflowUtils.getFieldValueFromIssue(issue, field);
+            if (object == null)
+                return false;
+            
             if (object instanceof User)
             {
                 User i = (User) object;
@@ -75,7 +78,9 @@ public class UserInFieldCondition implements Condition{
                         {
                             User inner = (User) item;
                             if (inner.equals(user))
+                            {
                                 return cond?true:false;
+                            }
                             else
                                 continue;
                         }
@@ -91,6 +96,7 @@ public class UserInFieldCondition implements Condition{
                             continue;
                     }
                 }
+                return cond?false:true;
             }
         }
         catch(EntityNotFoundException ex)

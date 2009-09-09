@@ -6,7 +6,7 @@
 		<select id="userField" name="userField">
 	    	#foreach ($val in $fieldList)
 	        	<option value="${val.id}"
-	                #if(${val.id.equals(userField.id)})
+	                #if(${val.id.equals($userField.id)})
 	                    SELECTED
 	                #end
                 >${val.name}</option>
