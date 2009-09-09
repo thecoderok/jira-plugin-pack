@@ -20,7 +20,15 @@
         <span class="label">Compare with:</span>
     </td>
     <td bgcolor="ffffff" nowrap>
-       <input type="text" name="myName" value="${selectedValue}">
+       <select id="date2FieldsList" name="date2FieldsList">
+            #foreach ($val in ${val-date2FieldsList})
+	                <option value="${val.id}"
+                    #if(${val.id.equals($val-date2Selected.id)})
+	                    SELECTED
+	                #end
+                    >${val.name}</option>
+            #end
+        </select>
 	   <br><font size="1">Choose a date field.</font>
     </td>
 </tr>

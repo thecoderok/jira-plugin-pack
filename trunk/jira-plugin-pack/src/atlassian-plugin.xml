@@ -112,7 +112,7 @@
             <resource type="velocity" name="edit-parameters" location="templates/validators/matchregexp-validator-edit.vm"/>
     </workflow-validator>
 
-    <workflow-validator key="dateCompareNow-validator" name="Date Compare With Current Date"
+    <workflow-validator key="dateCompareNow-validator" name="Compare Date Field With Current Date"
 		class="com.gsoft.workflow.validators.factories.WorkflowDateCompareValidatorPluginFactory">
 		<description>Compare date field with current date during a workflow transition.</description>
 

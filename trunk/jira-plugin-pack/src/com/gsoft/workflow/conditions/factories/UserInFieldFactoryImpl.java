@@ -8,6 +8,7 @@ import com.atlassian.core.user.GroupUtils;
 import com.atlassian.jira.plugin.workflow.AbstractWorkflowPluginFactory;
 import com.atlassian.jira.plugin.workflow.WorkflowPluginConditionFactory;
 import com.googlecode.jsu.util.CommonPluginUtils;
+import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.user.Group;
 import com.opensymphony.workflow.loader.AbstractDescriptor;
 import com.opensymphony.workflow.loader.ConditionDescriptor;
@@ -48,7 +49,7 @@ public class UserInFieldFactoryImpl extends AbstractWorkflowPluginFactory
         {
             ConditionDescriptor conditionDescriptor = (ConditionDescriptor)descriptor;
             velocityParams.put("comparetype", conditionDescriptor.getArgs().get("comparetype"));
-            velocityParams.put("userField", conditionDescriptor.getArgs().get("userField"));
+            velocityParams.put("userField", WorkflowUtils.getFieldFromKey((String) conditionDescriptor.getArgs().get("userField")));
             return;
         }
     }
