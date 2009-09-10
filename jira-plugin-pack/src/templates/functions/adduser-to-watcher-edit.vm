@@ -1,0 +1,11 @@
+<tr bgcolor=ffffff>
+    <td align="right" valign="top" bgcolor="fffff0" width="40%">
+        <span class="label">Choose witch user to add to watchers:</span>
+    </td>
+    <td bgcolor="ffffff" nowrap>
+        <INPUT TYPE=RADIO NAME="userSelect" VALUE="assignee" #if ($val == 'assignee') CHECKED #end>Assignee<br>
+        <INPUT TYPE=RADIO NAME="userSelect" VALUE="reporter" #if ($val == 'reporter') CHECKED #end>Reporter<BR>
+        <INPUT TYPE=RADIO NAME="userSelect" VALUE="current user" #if ($val == 'current user') CHECKED #end>Current user<P>
+	<br><font size="1">Select user</font>
+    </td>
+</tr>
