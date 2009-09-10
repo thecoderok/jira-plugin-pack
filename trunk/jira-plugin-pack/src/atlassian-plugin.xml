@@ -5,7 +5,7 @@
         <application-version min="3.13" max="3.13"/>
         <vendor name="Ganzha Vitaliy" url="http://bytes.org.ua"/>
     </plugin-info>
-    <!--Conditions
+    <!--Conditions-->
     <workflow-condition key="issue-hasn't-unclosed-subtasks"
                         name="Issue hasn't unclosed subtask"
                         class="com.gsoft.workflow.conditions.factories.IssueHasUnlosedSubtasksFactory">
@@ -25,7 +25,7 @@
         <resource type="velocity" name="input-parameters" location="templates/conditions/isuseringroup-condition-input-params.vm"/>
         <resource type="velocity" name="edit-parameters" location="templates/conditions/isuseringroup-condition-edit-params.vm"/>
     </workflow-condition>
-    -->
+
     <workflow-condition key="isuserinfield-condition"
                         name="User in/not in specified field"
                         class="com.gsoft.workflow.conditions.factories.UserInFieldFactoryImpl">
@@ -37,7 +37,7 @@
         <resource type="velocity" name="input-parameters" location="templates/conditions/isuserinfield-condition-edit-params.vm"/>
         <resource type="velocity" name="edit-parameters" location="templates/conditions/isuserinfield-condition-edit-params.vm"/>
     </workflow-condition>
-    <!--Post Function
+    <!--Post Function-->
     <workflow-function key="assign-to-parent-issue-assignee-function"
                		name="Assign to parent issue assignee"
                		class="com.gsoft.workflow.functions.factories.AssignToParentIssueAssigneePluginFactory">
@@ -94,9 +94,29 @@
         <resource type="velocity" name="edit-parameters"	location="templates/functions/setfieldfromuserprop-function-edit.vm" />
 
     </workflow-function>
-                    -->
 
-    <!--Validators
+    <workflow-function key="add-user-to-watcherlist"
+                    name="Add user to watcher list"
+                    class="com.gsoft.workflow.functions.factories.AddUserToWatchersFactory">
+            <description>
+                    Add user (Assignee, Current, Reporter) to watcher list
+            </description>
+            <function-class>
+                    com.gsoft.workflow.functions.AddUserToWatchersFunction
+            </function-class>
+
+            <orderable>true</orderable>
+            <unique>false</unique>
+            <deletable>true</deletable>
+            <editable>true</editable>
+
+            <resource type="velocity" name="view"	location="templates/functions/adduser-to-watcher-view.vm" />
+            <resource type="velocity" name="input-parameters"	location="templates/functions/adduser-to-watcher-edit.vm" />
+            <resource type="velocity" name="edit-parameters"	location="templates/functions/adduser-to-watcher-edit.vm" />
+    </workflow-function>
+    <!--Validators-->
+
+    <!--Validators-->
     <workflow-validator key="regular-expression-match-validator" name="Regular Expression Match Validator"
             class="com.gsoft.workflow.validators.factories.RegularExpressionValidatorFactory">
             <description>The value of the field must mutch to the specified pattern (Supports Perl-style patterns - http://www.perl.com/doc/manual/html/pod/perlre.html) </description>
@@ -121,5 +141,5 @@
 		<resource type="velocity" name="view" location="templates/validators/datecompare-validator-view.vm"/>
 		<resource type="velocity" name="input-parameters" location="templates/validators/datecompare-validator-input.vm"/>
 		<resource type="velocity" name="edit-parameters" location="templates/validators/datecompare-validator-edit.vm"/>
-	</workflow-validator>-->
+	</workflow-validator>
 </atlassian-plugin>
