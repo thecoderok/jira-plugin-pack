@@ -3,9 +3,9 @@
         <span class="label">Choose witch user to add to watchers:</span>
     </td>
     <td bgcolor="ffffff" nowrap>
-        <INPUT TYPE=RADIO NAME="userSelect" VALUE="assignee" #if ($val == 'assignee') CHECKED #end>Assignee<br>
-        <INPUT TYPE=RADIO NAME="userSelect" VALUE="reporter" #if ($val == 'reporter') CHECKED #end>Reporter<BR>
-        <INPUT TYPE=RADIO NAME="userSelect" VALUE="current user" #if ($val == 'current user') CHECKED #end>Current user<P>
+        <INPUT TYPE=RADIO NAME="userSelect" VALUE="assignee" #if ($val) #if($val == 'assignee') CHECKED #end #end>Assignee<br>
+        <INPUT TYPE=RADIO NAME="userSelect" VALUE="reporter" #if ($val) #if ($val == 'reporter') CHECKED #end #end>Reporter<BR>
+        <INPUT TYPE=RADIO NAME="userSelect" VALUE="current user" #if ($val) #if ($val == 'current user') CHECKED #end #end>Current user<P>
 	<br><font size="1">Select user</font>
     </td>
 </tr>
