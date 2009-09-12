@@ -142,4 +142,21 @@
 		<resource type="velocity" name="input-parameters" location="templates/validators/datecompare-validator-input.vm"/>
 		<resource type="velocity" name="edit-parameters" location="templates/validators/datecompare-validator-edit.vm"/>
 	</workflow-validator>
+        <!--webwork-->
+        <webwork1 key="EditUserDashboards" name="Administer user dashboards"  class="java.lang.Object" roles-required="admin">
+        <actions>
+            <action name="AdministerUserDashboards" alias="AdministerUserDashboards">
+                <view name="success">/templates/webwork/admin-dashboards-view.vm</view>
+                <view name="input">/templates/webwork/admin-dashboards-input.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+
+    <!--Admin link-->
+    <web-item key="user_dashboards_administration" name="User Dashboards Administraton Link" section="system.admin/globalsettings"
+              i18n-name-key="User Dashboards" system="true" weight="20">
+        <label key="User Dashboards"/>
+        <link linkId="edit_dashboards">/secure/admin/AdministerUserDashboards!default.jspa</link>
+        <condition class="com.atlassian.jira.plugin.webfragment.conditions.UserIsAdminCondition"/>
+    </web-item>
 </atlassian-plugin>
