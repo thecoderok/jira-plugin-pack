@@ -17,7 +17,7 @@
                                 <table cellpadding="2" cellspacing="2">
                                         <tbody><tr>
                                                 <td width="50%" align="right">
-                                                    <a href="$req.contextPath/secure/admin/AdministerUserDashboards!default.jspa">Set dashboard again&nbsp;<img src="$req.contextPath/images/icons/arrow_right_small.gif"></a>
+                                                    <a href="$req.contextPath/secure/admin/AdministerUserDashboards!default.jspa">Set dashboard again&nbsp;<img src="$req.contextPath/images/icons/arrow_right_small.gif" alt="arrow"></a>
                                                 </td>
                                         </tr>
                                         </tbody></table>
