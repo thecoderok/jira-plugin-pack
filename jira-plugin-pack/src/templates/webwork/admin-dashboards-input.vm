@@ -71,7 +71,7 @@
 							</tr>
 							<tr>
 								<td align="right">
-									Select Dashboard to set:
+									Select Dashboard to set (In this list shows only your favorites dashboards. You can edit them <a href="$req.contextPath/secure/ConfigurePortalPages!default.jspa?view=favourites">here</a>):
 								</td>
 								<td
                                                                     #set ($id = 'dashboardId')
