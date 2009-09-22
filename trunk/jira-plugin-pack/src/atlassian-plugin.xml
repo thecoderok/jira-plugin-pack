@@ -114,8 +114,40 @@
             <resource type="velocity" name="input-parameters"	location="templates/functions/adduser-to-watcher-edit.vm" />
             <resource type="velocity" name="edit-parameters"	location="templates/functions/adduser-to-watcher-edit.vm" />
     </workflow-function>
-    <!--Validators-->
 
+    <workflow-function key="assign-from-group-customfield-function"
+               		name="Assign issue to group member"
+               		class="com.gsoft.workflow.functions.factories.GetAssigneeFromGroupPluginFactory">
+		<description>
+			Issue is assigned to member of group from selected Group Select Custom Field
+		</description>
+		<function-class>
+			com.gsoft.workflow.functions.GetAssigneeFromGroup
+		</function-class>
+		<orderable>true</orderable>
+		<unique>false</unique>
+		<deletable>true</deletable>
+		<editable>true</editable>
+		<resource type="velocity" name="view"	location="templates/functions/view-assign-from-customfield-function.vm" />
+		<resource type="velocity" name="input-parameters"	location="templates/functions/inp-params-assign-from-customfield-function.vm" />
+		<resource type="velocity" name="edit-parameters"	location="templates/functions/inp-params-assign-from-customfield-function.vm" />
+	</workflow-function>
+
+    <workflow-function key="assign-to-parent-issue-reporter-function"
+               		name="Assign to parent issue reporter"
+               		class="com.gsoft.workflow.functions.factories.AssignToParentIssueAssigneePluginFactory">
+		<description>
+			This issue (sub-task) will be assigned to the parent issue reporter
+		</description>
+		<function-class>
+			com.gsoft.workflow.functions.AssignToParentIssueReporter
+		</function-class>
+		<orderable>true</orderable>
+		<unique>false</unique>
+		<deletable>true</deletable>
+		<editable>true</editable>
+		<resource type="velocity" name="view"	location="templates/functions/assign-to-parent-reporter-function-view.vm" />
+    </workflow-function>
     <!--Validators-->
     <workflow-validator key="regular-expression-match-validator" name="Regular Expression Match Validator"
             class="com.gsoft.workflow.validators.factories.RegularExpressionValidatorFactory">
