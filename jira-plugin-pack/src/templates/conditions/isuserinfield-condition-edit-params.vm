@@ -21,6 +21,6 @@
     </td>
     <td bgcolor="ffffff" nowrap>
         #selectMapSelected ("comparetype" ${comparetypes} ${comparetype})
-        <br><font size="1">Choose if user must be or not in group</font>
+        <br><font size="1">Choose if user must be or not in field</font>
     </td>
 </tr>
