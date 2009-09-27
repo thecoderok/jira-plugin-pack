@@ -1,0 +1,13 @@
+It must fulfill that the current date must be
+#if (${val-conditionSelected})
+	<b>${val-conditionSelected.toString()}</b>
+#end
+ value of 
+#if (${val-date2Selected})
+	<b>${val-date2Selected.name}</b>
+#end
+#if (${val-includeTimeSelected.value}=="Yes")
+	. Including time part.
+#else
+	. Only date part.
+#end

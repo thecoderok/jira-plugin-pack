@@ -1,0 +1,1 @@
+The value of the <b>${selectedField.getName()}</b> must match <b>${pattern}</b> pattern.
