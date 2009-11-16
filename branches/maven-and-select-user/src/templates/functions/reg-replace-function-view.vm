@@ -1,0 +1,1 @@
+The value of <b>${selectedField.name}</b>, thats matches the <b>$pattern</b>, will be replaced by <b>$replacement</b>
