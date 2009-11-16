@@ -10,6 +10,7 @@ import com.opensymphony.workflow.FunctionProvider;
 import com.opensymphony.workflow.WorkflowException;
 import java.util.Map;
 import com.atlassian.jira.security.Permissions;
+import org.ofbiz.core.entity.GenericValue;
 /**
  *
  * @author Ganzha Vitaliy

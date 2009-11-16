@@ -1,8 +1,5 @@
 package com.gsoft.workflow.functions;
 
-import com.atlassian.core.action.ActionUtils;
-import com.atlassian.core.ofbiz.CoreFactory;
-import com.atlassian.core.util.map.EasyMap;
 import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.issue.ModifiedValue;
 import com.atlassian.jira.issue.MutableIssue;
@@ -17,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-import webwork.dispatcher.ActionResult;
 
 public class GetAssigneeFromGroup implements FunctionProvider {
 
@@ -70,15 +66,7 @@ public class GetAssigneeFromGroup implements FunctionProvider {
        if (assignee!=null)
        {
          issue.setAssignee(assignee);
-         try {
-                Map parameters = EasyMap.build( "issueObject", issue, "issue", issue.getGenericValue(), "remoteUser", ComponentManager.getInstance().getJiraAuthenticationContext().getUser() );
-                ActionResult aResult;
-                aResult = CoreFactory.getActionDispatcher().execute(com.atlassian.jira.action.ActionNames.ISSUE_UPDATE, parameters);
-                ActionUtils.checkForErrors( aResult );
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                issue.store();
-            }
+         issue.store();
        }
        else
          throw (new WorkflowException("Didn't find assignee!"));
