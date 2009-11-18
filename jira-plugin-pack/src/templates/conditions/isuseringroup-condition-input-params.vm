@@ -1,0 +1,22 @@
+<tr bgcolor=ffffff>
+    <td align="right" valign="top" bgcolor="fffff0">
+        <span class="label">$i18n.getText("admin.common.words.group"):</span>
+    </td>
+    <td bgcolor="ffffff" nowrap>
+        #set ($grps = ${groups})
+
+        #selectMap ("group" ${grps})
+        <br><font size="1">Select group to check</font>
+    </td>
+</tr>
+<tr bgcolor=ffffff>
+    <td align="right" valign="top" bgcolor="fffff0">
+        <span class="label">Choose condition type:</span>
+    </td>
+    <td bgcolor="ffffff" nowrap>
+        #set ($cmptp = ${comparetypes})
+
+        #selectMap ("comparetype" ${cmptp})
+        <br><font size="1">Choose if user must be or not in group</font>
+    </td>
+</tr>

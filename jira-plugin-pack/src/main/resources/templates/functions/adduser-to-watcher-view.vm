@@ -1,0 +1,14 @@
+#set ($userString = "")
+#if ($value)
+    #foreach ($selectedValue in $value)
+        #if ($userString == "")
+            #set ($userString="<b>$selectedValue</b>")
+        #else
+            #set ($userString="${userString}, <b>$selectedValue</b>")
+        #end
+    #end
+    $userString
+#else
+	<b>$val</b>
+#end
+ will be added to watcher list.

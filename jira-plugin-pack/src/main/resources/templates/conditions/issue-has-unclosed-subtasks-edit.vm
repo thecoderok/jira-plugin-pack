@@ -1,0 +1,9 @@
+<tr bgcolor=ffffff>
+    <td align="right" valign="top" bgcolor="fffff0">
+        <span class="label">Choose the condition:</span>
+    </td>
+    <td bgcolor="ffffff" nowrap>
+        #selectMapSelected ("condition" ${conditions} ${selected})
+        <br><font size="1">The condition to check</font>
+    </td>
+</tr>
