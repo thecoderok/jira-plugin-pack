@@ -19,11 +19,10 @@ import com.opensymphony.workflow.loader.FunctionDescriptor;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 
 /**
  * 
- * @author Ganzha Vitaliy
+ * @author <a href="http://bytes.org.ua/">Ganzha Vitaliy</a>
  * @author <a href="lbinder@folica.com">Lon F. Binder</a>
  */
 public class AddUserToWatchersFactory extends AbstractWorkflowPluginFactory
@@ -146,9 +145,10 @@ public class AddUserToWatchersFactory extends AbstractWorkflowPluginFactory
 		// If specific users have been named, let's track those as well
 		if (AddUserToWatchersFunction.SELECTED_USER.equals(value)) {
 			String names = extractSingleParam(functionParams,
-					"$customField.id");
-			params.put(AddUserToWatchersFunction.ARGSKEY_SELECT_USERS, 
-					AddUserToWatchersFunction.trimUsernames(names));
+					"UserPicker");
+
+        params.put(AddUserToWatchersFunction.ARGSKEY_SELECT_USERS,
+			AddUserToWatchersFunction.trimUsernames(names));
 		}
 
 		return params;

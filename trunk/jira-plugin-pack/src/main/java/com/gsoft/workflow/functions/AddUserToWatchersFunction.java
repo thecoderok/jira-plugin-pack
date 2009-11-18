@@ -1,5 +1,6 @@
 package com.gsoft.workflow.functions;
 
+import com.atlassian.core.user.UserUtils;
 import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.bc.user.search.UserPickerSearchService;
 import com.atlassian.jira.config.properties.ApplicationProperties;
@@ -14,6 +15,7 @@ import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.user.util.UserUtil;
 
 import com.opensymphony.module.propertyset.PropertySet;
+import com.opensymphony.user.EntityNotFoundException;
 import com.opensymphony.user.User;
 import com.opensymphony.workflow.FunctionProvider;
 import com.opensymphony.workflow.WorkflowException;
@@ -28,7 +30,7 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  *
- * @author Ganzha Vitaliy
+ * @author <a href="http://bytes.org.ua/">Ganzha Vitaliy</a>
  * @author <a href="lbinder@folica.com">Lon F. Binder</a>
  */
 public class AddUserToWatchersFunction extends WatcherFieldType 
@@ -224,8 +226,14 @@ public class AddUserToWatchersFunction extends WatcherFieldType
 		if (StringUtils.isBlank(usernames)) {
 			return null;
 		}
-		
-		return usernames.trim().split("[\\s|,]+");
+		usernames = usernames.replace(", ", ",");
+		return usernames.trim().split("[|,]+");
 	}
+
+    public static void checkForValidUsers(String[] usernames) throws EntityNotFoundException
+    {
+        for (int i = 0; i<usernames.length;++i)
+            UserUtils.getUser(usernames[i]);
+    }
 	
 } // Everyone likes the end of class
