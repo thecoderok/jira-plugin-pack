@@ -11,12 +11,13 @@
         	#if ($val) #if ($val == 'currentuser') checked="checked" #end #end>$i18n.getText("user_select.current_user")<br />
     	<input type="radio" name="userSelect" id="userSelect" value="selectuser"
         	#if ($val) #if ($val == 'selectuser') checked="checked" #end #end>$i18n.getText("user_select.select_user")<br />
-		#parse("templates/plugins/fields/edit/edit-multiuser.vm")
+
+        #parse("templates/utils/edit-multiuser.vm")
 		<script type="text/javascript">
 			function tickSelectRadio() {
-				document.getElementById('userSelect').checked=true;
+				document.getElementById('$windowName').checked=true;
 			}
-			document.getElementById('$customField.id').onclick=tickSelectRadio;
+			document.getElementById('$windowName').onclick=tickSelectRadio;
 		</script>	
     </td>
 </tr>

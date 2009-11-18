@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
 		<groupId>com.atlassian.jira.plugins</groupId>
@@ -9,14 +10,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gsoft.workflow</groupId>
 	<artifactId>jira-plugin-pack</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 
 	<name>JIRA Plugin Pack</name>
 	<packaging>atlassian-plugin</packaging>
 	<description>This plugin contains a set of JIRA workflow elements: 
     	conditions, validators, and post functions. It includes an instrument to
     	assign dashboards to selected users or groups.</description>
-	<url></url>
 	<scm>
 		<connection>scm:svn:http://jira-plugin-pack.googlecode.com/svn/trunk</connection>
 		<developerConnection>scm:svn:http://jira-plugin-pack.googlecode.com/svn/trunk</developerConnection>
@@ -37,14 +37,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	<dependencies>
-		<dependency>
-			<groupId>com.atlassian.jira.issue.customfields.impl</groupId>
-			<artifactId>jira-watcher-field</artifactId>
-			<version>1.0.2</version>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
 
 	<properties>
 		<atlassian.plugin.key>com.gsoft.workflow.jira-plugin-pack</atlassian.plugin.key>
@@ -64,4 +56,13 @@
 			<url>http://www.folica.com</url>
 		</developer>
 	</developers>
+
+	<dependencies>
+        <dependency>
+            <groupId>com.atlassian.jira.issue.customfields.impl</groupId>
+            <artifactId>jira-watcher-field</artifactId>
+            <version>1.0.2</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>
