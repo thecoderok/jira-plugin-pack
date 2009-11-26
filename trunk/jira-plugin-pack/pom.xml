@@ -10,7 +10,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gsoft.workflow</groupId>
 	<artifactId>jira-plugin-pack</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 
 	<name>JIRA Plugin Pack</name>
 	<packaging>atlassian-plugin</packaging>
