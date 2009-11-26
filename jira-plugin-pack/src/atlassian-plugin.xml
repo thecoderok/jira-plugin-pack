@@ -191,4 +191,14 @@
         <link linkId="edit_dashboards">/secure/admin/AdministerUserDashboards!default.jspa</link>
         <condition class="com.atlassian.jira.plugin.webfragment.conditions.UserIsAdminCondition"/>
     </web-item>
+
+    <!--Custom Field-->
+    <customfield-type key="regexp-customfield"
+                     name="Regular Expression Custom Field"
+                     class="com.gsoft.customfields.RegExpCF">
+        <description>Allow to set pattern for field value (e.g. IP Address)</description>
+        <resource type="velocity" name="view" location="templates/customfields/regexp-cf-view.vm"/>
+        <resource type="velocity" name="edit" location="templates/customfields/regexp-cf-edit.vm"/>
+        <resource type="velocity" name="xml" location="templates/customfields/regexp-cf-xml.vm"/>
+    </customfield-type>
 </atlassian-plugin>
