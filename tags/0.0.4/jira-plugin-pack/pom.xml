@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>com.atlassian.jira.plugins</groupId>
+		<artifactId>jira-plugin-base</artifactId>
+		<version>15</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.gsoft.workflow</groupId>
+	<artifactId>jira-plugin-pack</artifactId>
+	<version>0.0.4</version>
+
+	<name>JIRA Plugin Pack</name>
+	<packaging>atlassian-plugin</packaging>
+	<description>This plugin contains a set of JIRA workflow elements: 
+    	conditions, validators, and post functions. It includes an instrument to
+    	assign dashboards to selected users or groups.
+v. 0.0.4: Added Regular Expression Field</description>
+	<scm>
+		<connection>scm:svn:http://jira-plugin-pack.googlecode.com/svn/trunk</connection>
+		<developerConnection>scm:svn:http://jira-plugin-pack.googlecode.com/svn/trunk</developerConnection>
+		<tag>scm:svn:http://jira-plugin-pack.googlecode.com/svn/tags</tag>
+		<url>http://jira-plugin-pack.googlecode.com/svn/trunk</url>
+	</scm>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<properties>
+		<atlassian.plugin.key>com.gsoft.workflow.jira-plugin-pack</atlassian.plugin.key>
+		<atlassian.product.version>3.13</atlassian.product.version>
+		<atlassian.plugin.application.version.min>3.11</atlassian.plugin.application.version.min>
+		<atlassian.plugin.application.version.max>3.14</atlassian.plugin.application.version.max>
+	</properties>
+
+	<developers>
+		<developer>
+			<name>Ganzha Vitaliy</name>
+			<url>http://bytes.org.ua</url>
+		</developer>
+		<developer>
+			<name>Lon F. Binder</name>
+			<email>lbinder@folica.com</email>
+			<url>http://www.folica.com</url>
+		</developer>
+	</developers>
+
+	<dependencies>
+        <dependency>
+            <groupId>com.atlassian.jira.issue.customfields.impl</groupId>
+            <artifactId>jira-watcher-field</artifactId>
+            <version>1.0.2</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>
