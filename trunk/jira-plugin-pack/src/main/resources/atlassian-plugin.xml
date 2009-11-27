@@ -2,7 +2,7 @@
 
 	<plugin-info>
 		<description>JIRA additional plugins</description>
-		<version>0.0.2</version>
+		<version>0.0.4</version>
 		<application-version min="3.13" max="3.14" />
 		<vendor name="Ganzha Vitaliy" url="http://bytes.org.ua" />
 	</plugin-info>
@@ -239,51 +239,7 @@
 			</action>
 		</actions>
 	</webwork1>
-	<customfield-type
-			key="watcherfieldtype"
-			i18n-name-key="watcherfield.type.name"
-			class="com.atlassian.jira.issue.customfields.impl.WatcherFieldType">
-		<description key="watcherfield.type.desc" />
-		<resource
-			type="i18n"
-			name="i18n"
-			location="com.atlassian.jira.issue.customfields.impl.WatcherFieldType"
-			/>
-		<resource
-			type="velocity"
-			name="view"
-			location="templates/plugins/fields/view/view-multiuser.vm"/>
-		<resource
-			type="velocity"
-			name="edit"
-			location="templates/plugins/fields/edit/edit-watcherfield.vm"/>
-	</customfield-type>
-	<customfield-searcher
-			key="watcherfieldsearcher"
-		    i18n-name-key="watcherfield.searcher.name"
-		    class="com.atlassian.jira.issue.customfields.searchers.UserPickerSearcher">
-	    <description key="watcherfield.searcher.desc" />
-    	<resource
-			type="i18n"
-			name="i18n"
-			location="com.atlassian.jira.issue.customfields.impl.WatcherFieldType"
-			/>
-	    <resource
-	    	type="velocity"
-	    	name="search"
-	    	location="templates/plugins/fields/edit-searcher/search-userpicker.vm"
-	    	/>
-	    <resource
-	    	type="velocity"
-	    	name="view"
-	    	location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"
-	    	/>
-	    <valid-customfield-type
-	    	package="${project.groupId}.${project.artifactId}"
-	    	key="watcherfieldtype"
-	    	/>
-	</customfield-searcher>
-
+	
 	<!--Admin link-->
 	<web-item key="user_dashboards_administration"
 		name="User Dashboards Administraton Link"
@@ -295,4 +251,26 @@
 		<condition
 			class="com.atlassian.jira.plugin.webfragment.conditions.UserIsAdminCondition" />
 	</web-item>
+
+    <!--Custom Field-->
+    <customfield-type key="regexp-customfield"
+                     name="Regular Expression Custom Field"
+                     class="com.gsoft.customfields.RegExpCF">
+        <description>Allow to set pattern for field value (e.g. IP Address)</description>
+        <resource type="velocity" name="view" location="templates/customfields/regexp-cf-view.vm"/>
+        <resource type="velocity" name="edit" location="templates/customfields/regexp-cf-edit.vm"/>
+        <resource type="velocity" name="xml" location="templates/customfields/regexp-cf-xml.vm"/>
+    </customfield-type>
+
+    <customfield-searcher key="regedxpfield-searcher" name="Search using simple text field"
+       class="com.atlassian.jira.issue.customfields.searchers.TextSearcher">
+        <description>Search using simple text field</description>
+
+        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-basictext.vm"/>
+        <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
+        <resource type="velocity" name="label" location="templates/customfields/seacher.vm"/>
+        <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
+        <valid-customfield-type package="com.gsoft.workflow" key="regexp-customfield"/>
+    </customfield-searcher>
+
 </atlassian-plugin>

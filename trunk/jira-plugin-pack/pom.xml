@@ -16,7 +16,8 @@
 	<packaging>atlassian-plugin</packaging>
 	<description>This plugin contains a set of JIRA workflow elements: 
     	conditions, validators, and post functions. It includes an instrument to
-    	assign dashboards to selected users or groups.</description>
+    	assign dashboards to selected users or groups.
+v. 0.0.4: Added Regular Expression Field</description>
 	<scm>
 		<connection>scm:svn:http://jira-plugin-pack.googlecode.com/svn/trunk</connection>
 		<developerConnection>scm:svn:http://jira-plugin-pack.googlecode.com/svn/trunk</developerConnection>
