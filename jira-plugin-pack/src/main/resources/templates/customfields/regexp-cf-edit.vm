@@ -1,0 +1,3 @@
+#controlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters.noHeader)
+<input name="$customField.id" id="$customField.id" size="27" value="$!value">
+#controlFooter ($action $fieldLayoutItem.fieldDescription $displayParameters.noHeader)
