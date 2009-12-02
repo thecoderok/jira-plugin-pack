@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- *
+ * $Rev$
  * @author Vmganzha
  */
 public class AdministerUserDashboards extends JiraWebActionSupport {
