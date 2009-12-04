@@ -1,0 +1,17 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>Clearing resolution...</title>
+<script language="JavaScript1.1" type="text/javascript">
+<!--
+location.replace("/browse/$!{key}"); 
+//-->
+</script>
+<noscript>
+<meta http-equiv="Refresh" content="0; URL=/browse/$!{key}"> 
+</noscript>
+</head>
+<body>
+/browse/$!{key}
+</body>
+</html>

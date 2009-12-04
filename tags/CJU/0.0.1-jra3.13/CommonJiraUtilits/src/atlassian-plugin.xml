@@ -1,0 +1,57 @@
+<atlassian-plugin key="ua.bytes.commonutils" name="Common Utilites">
+    <plugin-info>
+        <description>Utilites for making life easier :)</description>
+        <version>0.0.1</version>
+        <application-version min="3.13" max="3.13"/>
+        <vendor name="Ganzha Vitaliy" url="http://gsoft.org.ua"/>
+    </plugin-info>
+    <!--clear resolution operation-->
+   <issue-operation key="clear-issue-resolution" name="Clear resolution (only for aministrators)" class="ua.bytes.commonutils.ClearResolutionIssueOperation" state='enabled'>
+        <resource type="velocity" name="view" location="templates/commonutils/operations/clearresolution.vm" />
+        <order>13</order>
+    </issue-operation>
+
+    <webwork1 key="ClearResolution" name="ClearResolution"  class="java.lang.Object">
+        <actions>
+            <action name="ClearResolution" alias="ClearResolution">
+                <view name="success">/templates/commonutils/webwork/clearresolution-wa.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+    <!-- remote reindex support -->
+    <rpc-soap key="soap" name="AB Custom WS"
+        class="ua.bytes.jira.rpc.soap.ABJiraSoapServiceImpl">
+        <description>Add possibility to remote administer JIRA.</description>
+        <service-path>abws-admin</service-path>
+        <published-interface>
+            ua.bytes.jira.rpc.soap.ABJiraSoapService
+        </published-interface>
+    </rpc-soap>
+    <!-- View Group Members -->
+    <webwork1 key="ABViewGroupMembers" name="ABViewGroupMembers"  class="java.lang.Object">
+        <actions>
+            <action name="ABViewGroupMembers" alias="ABViewGroupMembers">
+                <view name="success">/templates/commonutils/webwork/ab-view-group-members.vm</view>
+                <view name="error">/templates/commonutils/webwork/ab-group-notfound.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+
+    <!--Partial reindexing-->
+    <webwork1 key="uabytes-partial-issues-reindex" name="UA-PartialIssueReindex"  class="java.lang.Object" roles-required="admin">
+        <actions>
+            <action name="admin.index.PartialIssueReindex" alias="PartialIssueReindex">
+                <view name="input">/templates/commonutils/webwork/reindex/partial-reindex-input.vm</view>
+                <view name="success">/templates/commonutils/webwork/reindex/partial-reindex-success.vm</view>
+                <view name="error">/templates/commonutils/webwork/reindex/partial-reindex-error.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+
+    <web-item key="uabytes-partial-issues-reindex-admin-link" name="Partial Reindex Administraton Link" section="system.admin/system"
+              i18n-name-key="Partial Issues Reindexing" system="true" weight="20">
+        <label key="Issues reindex"/>
+        <link linkId="edit_dashboards">/secure/admin/PartialIssueReindex!default.jspa</link>
+        <condition class="com.atlassian.jira.plugin.webfragment.conditions.UserIsAdminCondition"/>
+    </web-item>
+ </atlassian-plugin>

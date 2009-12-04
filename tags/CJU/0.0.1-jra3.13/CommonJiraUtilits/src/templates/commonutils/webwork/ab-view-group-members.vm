@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Просмотр членов группы $!{group.name}</title>
+    </head>
+
+    <body>
+      <br>
+		<table class="jiraform maxWidth" width="100%">
+			<tbody><tr>
+			    <td class="jiraformheader">
+			    	<h3 class="formtitle">Группа $!{group.name} состоит из таких членов:</h3>
+		    	</td>
+			</tr>
+
+			<tr>
+			    <td class="jiraformbody" bgcolor="#FFFFFF">
+                                <table cellpadding="2" cellspacing="2" class="jiraformbody">
+                                        <tbody>
+                                            #foreach ($val in $!members)
+                                            <tr>
+                                                <td width="33%" align="right">
+                                                    $userformat.formatUser(${val.getName()}, 'profileLink', "user_cf")
+                                                </td>
+                                                <td width="33%" align="right">
+                                                    $val.fullName
+                                                </td>
+                                                <td width="34%" align="right">
+                                                    $val.email
+                                                </td>
+                                            </tr>
+                                            #end
+                                        </tbody></table>
+			    </td>
+
+		    </tr>
+		</table>
+
+    </body>
+</html>

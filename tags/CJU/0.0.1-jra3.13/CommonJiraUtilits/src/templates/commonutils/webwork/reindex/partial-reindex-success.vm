@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Partial Reindex: Results</title>
+    </head>
+
+    <body>
+      <br>
+		<table class="jiraform maxWidth" width="100%">
+			<tbody><tr>
+			    <td class="jiraformheader">
+			    	<h3 class="formtitle">The operation was successful!</h3>
+		    	</td>
+			</tr>
+
+			<tr>
+			    <td class="jiraformbody" bgcolor="#FFFFFF">
+                    <table cellpadding="2" cellspacing="2" class="jiraformbody">
+                        <tbody>
+                            <tr>
+                                <td >
+                                 $!message
+                                 <br><br>
+                                 <form action="/secure/admin/PartialIssueReindex!default.jspa">
+                                     <input type="submit" value="Ok">
+                                 </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+			    </td>
+
+		    </tr>
+		</table>
+
+    </body>
+</html>
