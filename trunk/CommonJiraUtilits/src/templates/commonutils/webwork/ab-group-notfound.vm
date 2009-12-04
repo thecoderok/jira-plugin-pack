@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Не найдена группа $!{gname}</title>
+    </head>
+
+    <body>
+      <br>
+		<table class="jiraform maxWidth" width="100%">
+			<tbody><tr>
+			    <td class="jiraformheader">
+                    <h3 class="formtitle"><font color="red">Не найдена группа $!{gname}</font></h3>
+		    	</td>
+			</tr>
+
+		</table>
+
+    </body>
+</html>

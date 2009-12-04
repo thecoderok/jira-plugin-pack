@@ -1,0 +1,231 @@
+<html>
+    <head>
+        <title>Partial Reindex: Select Issues to Reindex</title>
+
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:dwr/engine.js" ></script>
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:dwr/util.js" ></script>
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:browser-detect/browser-detect.js" ></script>
+
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:yui/yahoo.js" ></script>
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:yui/dom.js" ></script>
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:yui/event.js" ></script>
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:yui-autocomplete/browser-detect.js" ></script>
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:yui-autocomplete/autocomplete.js" ></script>
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:yui-autocomplete/autocomplete-widget.js" ></script>
+        <link type="text/css" rel="stylesheet" href="/s/330/1/1.0/_/download/resources/jira.webresources:yui-autocomplete/autocomplete-widget.css" media="all"/>
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:ajax-issuepicker/AjaxIssuePicker.js" ></script>
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:ajax-preview/RendererPreviewAjaxUtil.js" ></script>
+
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:yui-container/connection.js" ></script>
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:yui-container/container.js" ></script>
+        <link type="text/css" rel="stylesheet" href="/s/330/1/1.0/_/download/resources/jira.webresources:yui-container/container.css" media="all"/>
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:json/json.js" ></script>
+        <script type="text/javascript" src="/s/330/1/1.0/_/download/resources/jira.webresources:jira-menubutton/menubutton-widget.js" ></script>
+        <link type="text/css" rel="stylesheet" href="/s/330/1/1.0/_/download/resources/jira.webresources:jira-menubutton/menubutton-widget.css" media="all"/>
+
+
+    </head>
+
+    <body>
+        <script type="text/javascript">
+        function toggleEnabled(elementEnable,elementDisable)
+        {
+          var enElem = document.getElementById(elementEnable);
+          var disElem = document.getElementById(elementDisable);
+          if (enElem && disElem)
+              {
+                  enElem.disabled = false;
+                  disElem.disabled = true;
+              }
+        }
+        </script>
+      <br>
+		<table class="jiraform maxWidth" width="100%">
+			<tbody><tr>
+			    <td class="jiraformheader">
+			    	<h3 class="formtitle">Select what you want to reindex:</h3>
+		    	</td>
+			</tr>
+
+			<tr>
+			    <td class="jiraformbody" bgcolor="#FFFFFF">
+                    <table cellpadding="2" cellspacing="2" class="jiraformbody">
+                        <tbody>
+                            <form id="jiraform" action="/secure/admin/PartialIssueReindex.jspa" method="post">
+                            <tr >
+                                <td #if ($action.getErrors().get("seltype")) class="formErrors" #end>
+                                    #if ($action.getErrors().get("seltype"))
+                                        <span class="errMsg">$textutils.htmlEncode($action.getErrors().get("seltype"))</span>
+                                        <br>
+                                    #end
+                                    <input #if ($seltype) #if($!seltype=="key") CHECKED #end #else CHECKED #end type="radio" name="seltype" id="seltype" value="key" onchange="toggleEnabled('linkKey','filterid')"/>Reindex selected issue keys
+                                </td>
+                                <td #if ($action.getErrors().get("linkKey")) class="formErrors" #end>
+                                    #if ($action.getErrors().get("linkKey"))
+                                        <span class="errMsg">$textutils.htmlEncode($action.getErrors().get("linkKey"))</span>
+                                        <br>
+                                    #end
+                                <!--Select issue key----------------------------------------------------------------------------------------------->
+                                  <div class="ajax_autocomplete" id="linkKey_container">
+                                  <input autocomplete="off" name="linkKey" id="linkKey" size="18" type="text" value="$!linkKey" #if ($seltype) #if($!seltype!="key") disabled="true" #end #end>
+                                  <a href="javascript:openIssuePicker('jiraform', 'linkKey', null, 'false', 'true', 'true', null)" title="Quick link to recently viewed issues">[select issue]
+                                  </a>
+                                  <div id="linkKey_results" class="ajax_results">
+                                    <div style="display: none;" class="yui-ac-content">
+                                      <div style="display: none;" class="yui-ac-hd">
+                                      </div>
+                                      <div class="yui-ac-bd">
+                                        <ul>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                          <li style="display: none;">
+                                          </li>
+                                        </ul>
+                                      </div>
+                                      <div style="display: none;" class="yui-ac-ft">
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="small">Enter start of issue key or part of summary to get a list of possible matches.
+                                  </div>
+
+
+                                </div>
+
+                                <script language="javascript" type="text/javascript">
+                                function openIssuePicker(formName, linkFieldName, currentissue, singleSelectOnly, showSubTasks, showSubTasksParent, selectedProjectId)
+                                {
+                                    var url = '/secure/popups/IssuePicker.jspa?';
+                                    url += 'formName=' + formName + '&';
+                                    url += 'linkFieldName=' + linkFieldName + '&';
+                                    url += 'currentIssue=' + currentissue + '&';
+                                    url += 'singleSelectOnly=' + singleSelectOnly + '&';
+                                    url += 'showSubTasks=' + showSubTasks + '&';
+                                    url += 'showSubTasksParent=' + showSubTasksParent + '&';
+                                    if (selectedProjectId != null)
+                                    {
+                                        url += 'selectedProjectId=' + selectedProjectId + '&';
+                                    }
+
+                                    var vWinUsers = window.open(url, 'UssueSelectorPopup', 'status=no,resizable=yes,top=100,left=200,width=620,height=500,scrollbars=yes,resizable');
+                                    vWinUsers.opener = self;
+                                    vWinUsers.focus();
+                                }
+
+                                    <!-- init autocomplete components -->
+                                    YAHOO.util.Event.addListener(window, 'load', function() {
+                                        var currentIssueKey = null ;
+                                        var fieldName = 'linkKey' ;
+                                        var currentProjectId = null;
+                                        var showSubTasks = true;
+                                        var showSubTaskParent = true;
+                                        var singleSelectOnly = false;
+                                        var limit = 20;
+
+
+                                       var yuiConfig = {
+                                                minQueryLength : 1,
+                                                queryDelay : 0.25,
+                                                cacheResults : false,
+                                                maxResultsDisplayed : limit,
+                                                delimChar : [',']
+                                        }
+                                        if (singleSelectOnly) {
+                                            yuiConfig.delimChar = '';
+                                        }
+
+                                        var config = {
+                                            inputId : "linkKey",
+                                            containerId : "linkKey_container",
+                                            resultsId : "linkKey_results",
+                                            waiticonId : "linkKey_waiticon",
+                                            dwrInvokerFunc : function(query, dwrCallContext)
+                                            {
+                                                AjaxIssuePicker.getIssues(fieldName, query, currentIssueKey, currentProjectId, showSubTasks, showSubTaskParent, dwrCallContext);
+                                            }
+                                        };
+                                        var issuePicker = new atlassian.jira.widget.AutoComplete(config, yuiConfig);
+                                    });
+                                </script>
+
+                                <!--END of Select issue key----------------------------------------------------------------------------------------->
+                                </td>
+                            </tr>
+                            <tr >
+                                <td>
+                                    <input type="radio" #if ($seltype) #if($!seltype=="filter") CHECKED #end #end  name="seltype" id="seltype" value="filter" onchange="toggleEnabled('filterid','linkKey')"/>Reindex issues returned by selected filter<br>
+                                        <span class="small">Note: In this list shows only yours favourites filters</span>
+                                </td>
+
+                                <td #if ($action.getErrors().get("filterid")) class="formErrors"  #end>
+                                    #if ($action.getErrors().get("filterid"))
+                                        <span class="errMsg">$textutils.htmlEncode($action.getErrors().get("filterid"))</span>
+                                        <br>
+                                    #end
+
+                                    <select name="filterid" id="filterid" #if ($seltype) #if($!seltype!="filter") disabled="true" #end #else disabled="true" #end>
+                                        <option value="-1" selected>[Please, select filter]</option>
+                                        #foreach ($val in $!filters)
+                                            <option value="$!val.id"
+                                            #if ($filterid)
+                                                #if ($filterid.equals($!val.id))
+                                                    SELECTED 
+                                                #end
+                                            #end
+                                            >$!val.name</option>
+                                        #end
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div align="center"><input name="confirm" value="Reindex" type="submit"></div>
+                                </td>
+                            </tr>
+                            </form>
+                        </tbody>
+                    </table>
+			    </td>
+
+		    </tr>
+		</table>
+
+    </body>
+</html>
