@@ -1,1 +1,0 @@
-Only users <b>${comparetype} ${userField.name}</b> field can execute this transition.
