@@ -1,0 +1,28 @@
+
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        
+        <vendor name="Vitaliy Ganzha" url="http://bytes.org.ua"/>
+
+    </plugin-info>
+
+    <workflow-function key="create-issue-on-transition-function"
+                name="Create issue during workflow transition"
+                class="ua.bytes.jiraplugin.WFCreateIssueOnTransitionFactory">
+        <description>
+        Issue is assigned to user in selected Group Select Custom Field
+        </description>
+        <function-class>
+        ua.bytes.jiraplugin.CreateIssueOnTransition
+        </function-class>
+        <orderable>true</orderable>
+        <unique>false</unique>
+        <deletable>true</deletable>
+        <editable>true</editable>
+        <resource type="velocity" name="view"	location="templates/create-during-transition-view.vm" />
+        <resource type="velocity" name="input-parameters"	location="templates/create-during-transition-edit.vm" />
+        <resource type="velocity" name="edit-parameters"	location="templates/create-during-transition-edit.vm" />
+    </workflow-function>
+</atlassian-plugin>
