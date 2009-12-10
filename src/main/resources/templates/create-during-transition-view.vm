@@ -1,8 +1,0 @@
-During this transition will be created issue in <b>$!{project.getName()}</b> project with <b>$!issuetype.name</b> issue type.
-New issue will be linked as <b>$selectedSide</b> with <b>$selectedLType.name</b> link type.
-#if ($!{CloneLinks.equals("1")})
-    Issue <b>links</b> will be cloned too.
-#end
-#if ($!{CloneAttachments.equals("1")})
-    Issue <b>attachments</b> will be copied too.
-#end
