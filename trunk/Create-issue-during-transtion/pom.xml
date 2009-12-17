@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ua.bytes.jiraplugin</groupId>
     <artifactId>Create-issue-during-transtion</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1</version>
 
     <name>Create issue during transtion plugin</name>
     <packaging>atlassian-plugin</packaging>
@@ -25,7 +25,7 @@
         <!-- JIRA data version -->
         <atlassian.product.data.version>3.13</atlassian.product.data.version>
     </properties>
-   
+
     <description>JIRA plugin for Creating issue during transition. Post-Function</description>
 	<url>http://bytes.org.ua/</url>
 
@@ -52,7 +52,7 @@
     </build>
 
 
-	
+
 
 
     <!-- TODO: Complete source control details -->
@@ -93,3 +93,4 @@
     </build>-->
 
 </project>
+
