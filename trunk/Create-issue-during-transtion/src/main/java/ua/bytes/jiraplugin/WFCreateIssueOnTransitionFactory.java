@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -25,6 +27,7 @@ public class WFCreateIssueOnTransitionFactory extends AbstractWorkflowPluginFact
         WorkflowPluginFunctionFactory {
 
     private final FieldManager fieldManager;
+    private static org.apache.log4j.Category log = org.apache.log4j.Category.getInstance(WFCreateIssueOnTransitionFactory.class);
 
     public WFCreateIssueOnTransitionFactory(FieldManager fieldManager) {
         this.fieldManager = fieldManager;
@@ -32,10 +35,8 @@ public class WFCreateIssueOnTransitionFactory extends AbstractWorkflowPluginFact
 
     protected void getVelocityParamsForInput(Map velocityParams) {
 
-        Collection<FieldConfigSchemeImpl> c = ComponentManager.getInstance().getIssueTypeSchemeManager().getAllSchemes();
-
-        velocityParams.put("FieldConfigSchemes", c);
-        Project prj = ComponentManager.getInstance().getProjectManager().getProjectObjByKey("SD");
+        Collection<Project> projectsList = ComponentManager.getInstance().getProjectManager().getProjects();
+        velocityParams.put("projectsList", projectsList);
         velocityParams.put("issueTypeManager", ComponentManager.getInstance().getIssueTypeSchemeManager());
 
         IssueLinkTypeManager issueLinkTypeManager = (IssueLinkTypeManager) ComponentManager.getComponentInstanceOfType(IssueLinkTypeManager.class);

@@ -4,10 +4,8 @@
     </td>
     <td bgcolor="ffffff" nowrap>
         <select name="issuetypeid" id="issuetypeid" class="imagebacked">
-            #foreach ($fcs in $FieldConfigSchemes)
-                #if ($fcs && $fcs.getAssociatedProjects())
                     #set ($projects = $!fcs.getAssociatedProjects())
-                    #foreach ($project in $projects)
+                    #foreach ($project in $projectsList)
                         #if ($project)
                             <optgroup label="$project.name">
                                 #set ($types = $!issueTypeManager.getIssueTypesForProject($project))
@@ -25,8 +23,6 @@
                              </optgroup>
                          #end
                     #end
-                #end
-            #end
         </select>
         <br><font size="1">Choose the project and issue type.</font>
     </td>
