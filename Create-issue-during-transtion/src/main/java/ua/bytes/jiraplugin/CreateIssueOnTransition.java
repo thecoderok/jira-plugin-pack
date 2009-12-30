@@ -7,12 +7,12 @@ import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.atlassian.jira.exception.CreateException;
 import com.atlassian.jira.issue.AttachmentManager;
 import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.IssueImpl;
 import com.atlassian.jira.issue.ModifiedValue;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.attachment.Attachment;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.config.FieldConfig;
+import com.atlassian.jira.issue.history.ChangeItemBean;
 import com.atlassian.jira.issue.issuetype.IssueType;
 import com.atlassian.jira.issue.link.IssueLink;
 import com.atlassian.jira.issue.link.IssueLinkManager;
@@ -20,12 +20,13 @@ import com.atlassian.jira.issue.link.IssueLinkType;
 import com.atlassian.jira.issue.link.IssueLinkTypeManager;
 import com.atlassian.jira.project.Project;
 import com.atlassian.jira.project.version.Version;
-import com.atlassian.jira.workflow.WorkflowFunctionUtils;
+import com.atlassian.jira.util.AttachmentUtils;
 import com.opensymphony.module.propertyset.PropertySet;
 import com.opensymphony.user.User;
 import com.opensymphony.util.TextUtils;
 import com.opensymphony.workflow.FunctionProvider;
 import com.opensymphony.workflow.WorkflowException;
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,9 +35,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.ofbiz.core.entity.GenericEntityException;
 import org.ofbiz.core.entity.GenericValue;
 
 public class CreateIssueOnTransition implements FunctionProvider {
@@ -51,6 +49,8 @@ public class CreateIssueOnTransition implements FunctionProvider {
     private IssueLinkManager issueLinkManager = cm.getIssueLinkManager();
     private static IssueLinkTypeManager issueLinkTypeManager = (IssueLinkTypeManager) ComponentManager.getComponentInstanceOfType(IssueLinkTypeManager.class);
     private final ApplicationProperties applicationProperties = cm.getApplicationProperties();
+
+    private static org.apache.log4j.Category log = org.apache.log4j.Category.getInstance(CreateIssueOnTransition.class);
 
     public void execute(Map transientVars, Map args, PropertySet ps) throws WorkflowException {
         try {
@@ -109,7 +109,7 @@ public class CreateIssueOnTransition implements FunctionProvider {
             Map modFields = originalIssue.getModifiedFields();
             Object value = null;
             ModifiedValue modValue;
-            
+
             for (Iterator iterator = customFields.iterator(); iterator.hasNext();) {
                 CustomField customField = (CustomField) iterator.next();
                 FieldConfig fc = customField.getRelevantConfig(issueObject);
@@ -118,15 +118,17 @@ public class CreateIssueOnTransition implements FunctionProvider {
                 }
                 // Set the custom field value of the clone to the value set in the original issue
                 modValue = (ModifiedValue) modFields.get(customField.getId());
-                if (modValue != null)
+                if (modValue != null) {
                     value = modValue.getNewValue();
+                }
 
-                if (value == null)
+                if (value == null) {
                     value = customField.getValue(originalIssue);
+                }
 
                 if (value != null) {
                     issueObject.setCustomFieldValue(customField, value);
-                value = null;
+                    value = null;
                 }
             }
 
@@ -153,14 +155,26 @@ public class CreateIssueOnTransition implements FunctionProvider {
                 Timestamp time = new Timestamp(dt.getTime());
                 for (Attachment a : files) {
                     try {
-                        mgr.createAttachment(newIssue, user, a.getMimetype(), a.getFilename(), a.getFilesize(), null, time);
-                    } catch (GenericEntityException ex) {
+                        /*
+                         * Fix: Attachment is not copied correctly in the new application.
+                         * 30.12.2009
+                         * Vitaliy M Ganzha
+                         */
+                        File f = AttachmentUtils.getAttachmentFile(a);
+                        ChangeItemBean b = mgr.createAttachment(f, a.getFilename(), a.getMimetype(), user, newIssue, null, new Timestamp(dt.getTime()));
+                    } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                 }
             }
 
             newIssue.store();
+            /*
+             * Fix: Reindex issue after all
+             * 30.12.2009
+             * Vitaliy M Ganzha
+             */
+            cm.getIndexManager().reIndex(newIssue);
         } catch (Throwable ex) {
             ex.printStackTrace();
             //we want let to know about some requiered fields, that not filled in this transition
@@ -243,8 +257,8 @@ public class CreateIssueOnTransition implements FunctionProvider {
     private boolean copyLink(IssueLink issueLink) {
         // Do not copy system links types and do not copy the cloners link type, as it is used to record the relationship between cloned issues
         // So if the cloners link type does not exists, or the link is not of cloners link type, and is not a system link, then copy it
-        return !issueLink.isSystemLink() &&
-                (getCloneIssueLinkType() == null || !getCloneIssueLinkType().getId().equals(issueLink.getIssueLinkType().getId()));
+        return !issueLink.isSystemLink()
+                && (getCloneIssueLinkType() == null || !getCloneIssueLinkType().getId().equals(issueLink.getIssueLinkType().getId()));
     }
 
     public List getCustomFields(Issue issue) {
