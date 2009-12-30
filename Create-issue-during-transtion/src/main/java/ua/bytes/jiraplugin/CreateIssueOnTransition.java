@@ -13,6 +13,8 @@ import com.atlassian.jira.issue.attachment.Attachment;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.config.FieldConfig;
 import com.atlassian.jira.issue.history.ChangeItemBean;
+import com.atlassian.jira.issue.index.DefaultIndexManager;
+import com.atlassian.jira.issue.index.IssueIndexManager;
 import com.atlassian.jira.issue.issuetype.IssueType;
 import com.atlassian.jira.issue.link.IssueLink;
 import com.atlassian.jira.issue.link.IssueLinkManager;
@@ -49,8 +51,8 @@ public class CreateIssueOnTransition implements FunctionProvider {
     private IssueLinkManager issueLinkManager = cm.getIssueLinkManager();
     private static IssueLinkTypeManager issueLinkTypeManager = (IssueLinkTypeManager) ComponentManager.getComponentInstanceOfType(IssueLinkTypeManager.class);
     private final ApplicationProperties applicationProperties = cm.getApplicationProperties();
-
-    private static org.apache.log4j.Category log = org.apache.log4j.Category.getInstance(CreateIssueOnTransition.class);
+    //private static org.apache.log4j.Category log = org.apache.log4j.Category.getInstance(CreateIssueOnTransition.class);
+    private static IssueIndexManager idxMgr = new DefaultIndexManager();
 
     public void execute(Map transientVars, Map args, PropertySet ps) throws WorkflowException {
         try {
@@ -153,6 +155,7 @@ public class CreateIssueOnTransition implements FunctionProvider {
                 List<Attachment> files = mgr.getAttachments(originalIssue);
                 Date dt = new Date();
                 Timestamp time = new Timestamp(dt.getTime());
+                Issue iss = cm.getIssueManager().getIssueObject(newIssue.getLong("id"));
                 for (Attachment a : files) {
                     try {
                         /*
@@ -161,20 +164,24 @@ public class CreateIssueOnTransition implements FunctionProvider {
                          * Vitaliy M Ganzha
                          */
                         File f = AttachmentUtils.getAttachmentFile(a);
-                        ChangeItemBean b = mgr.createAttachment(f, a.getFilename(), a.getMimetype(), user, newIssue, null, new Timestamp(dt.getTime()));
+
+                        mgr.createAttachmentCopySourceFile(f, a.getFilename(), a.getMimetype(), user.getName(), iss, null, time);
+                        //createAttachmentCopySourceFile(final File file, final String filename, final String contentType, final String attachmentAuthor, final Issue issue, final Map attachmentProperties, final Date createdTime)
                     } catch (Exception ex) {
                         ex.printStackTrace();
+                    } finally {
+                        /*
+                         * Fix: Reindex issue after all
+                         * 30.12.2009
+                         * Vitaliy M Ganzha
+                         */
+                        idxMgr.reIndex(iss);
+                        newIssue.store();
                     }
                 }
             }
 
-            newIssue.store();
-            /*
-             * Fix: Reindex issue after all
-             * 30.12.2009
-             * Vitaliy M Ganzha
-             */
-            cm.getIndexManager().reIndex(newIssue);
+
         } catch (Throwable ex) {
             ex.printStackTrace();
             //we want let to know about some requiered fields, that not filled in this transition
