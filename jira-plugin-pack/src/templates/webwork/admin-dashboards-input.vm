@@ -1,0 +1,139 @@
+#macro(xoldgroupPicker $action $formName $fieldName $fieldValue $multiselect $imageName $style)
+    <script>
+    function open${fieldName}GroupWindow(element)
+    {
+        var vWinUsers = window.open('$req.contextPath/secure/popups/GroupPickerBrowser.jspa?formName=$formName&multiSelect=$multiselect&element=' + element, 'GroupPicker', 'status=yes,resizable=yes,top=100,left=200,width=580,height=750,scrollbars=yes');
+        vWinUsers.opener = self;
+        vWinUsers.focus();
+    }
+    </script>
+
+    #if ($multiselect)
+      <textarea name="$fieldName" id="$fieldName" cols="40" rows="4" wrap="virtual" class="grouppickerfield" #if($style)style="$style"#end>$!fieldValue</textarea>
+    #else
+      <input type="text" name="$fieldName" id="$fieldName" value="$textutils.htmlEncode($!fieldValue)" class="grouppickerfield" #if($style)style="$style"#end>
+    #end
+
+    #if ($action.isHasPermission("pickusers"))
+      <a id="$fieldName" href="javascript:open${fieldName}GroupWindow('$fieldName');">
+          <img
+          #if ($multiselect)
+              title="$action.getText('grouppicker.select.groups')"
+          #else
+              title="$action.getText('grouppicker.select.group')"
+          #end
+
+          #if ($imageName)
+              name="$imageName"
+          #else
+              name="assigneeImage"
+          #end
+
+          src="$req.contextPath/images/icons/filter_public.gif" hspace="0" height="16" width="16" border="0" align="top"></a>
+    #else
+      <img title="$action.getText('grouppicker.nopermissions')" src="$req.contextPath/images/icons/userpicker_disabled.gif" hspace="0" align="top" height="16" width="16" border="0" alt="" />
+    #end
+#end
+<html>
+    <head>
+        <title>Administer user Dashboards</title>
+    </head>
+
+    <body>
+      <br>
+		<table class="jiraform maxWidth" width="100%">
+			<tbody><tr>
+			    <td class="jiraformheader">
+			    	<h3 class="formtitle">Select the dashboard and it's assignee</h3>
+		    	</td>
+			</tr>
+
+			<tr>
+			    <td class="jiraformbody">
+					<form method="POST" action="$req.contextPath/secure/admin/AdministerUserDashboards.jspa" name="jiraform">
+						<table cellpadding="2" cellspacing="2">
+							<tbody><tr>
+								<td width="50%" align="right">
+									If you want to set dashboard to specific user, then choose him in list, otherwise - left field empty
+								</td>
+								<td width="50%"
+                                                                    #set ($id = 'userName')
+                                                                    #if ($action.getErrors().get($id))
+                                                                      #set ($error= $action.getErrors().get($id))
+                                                                    #end
+                                                                    #if ($error)
+                                                                      bgcolor="#FFCCCC"
+                                                                    #end
+                                                                    >
+                                                                    #if ($error)
+                                                                      <span class="errMsg">$error</span><br>
+                                                                    #end
+                                                                        #userPicker ($action "userName" $userName false "picker" "" true 20)
+								</td>
+							</tr>
+							<tr>
+								<td align="right">
+									If you want to set dashboard to the group members, then choose group in list, otherwise - left field empty
+								</td>
+								<td
+                                                                    #set ($id = 'groupName')
+                                                                    #if ($action.getErrors().get($id))
+                                                                      #set ($error2= $action.getErrors().get($id))
+                                                                    #end
+                                                                    #if ($error2)
+                                                                      bgcolor="#FFCCCC"
+                                                                    #end
+                                                                    >
+                                                                    #if ($error2)
+                                                                      <span class="errMsg">$error2</span><br>
+                                                                    #end
+                                                                    #xoldgroupPicker ($action "jiraform" "groupName" $groupName false "grpicker" "")
+								</td>
+							</tr>
+							<tr>
+								<td align="right">
+									Select Dashboard to set (In this list shows only your favorites dashboards. You can edit them <a href="$req.contextPath/secure/ConfigurePortalPages!default.jspa?view=favourites">here</a>):
+								</td>
+								<td
+                                                                    #set ($id = 'dashboardId')
+                                                                    #if ($action.getErrors().get($id))
+                                                                      #set ($error3= $action.getErrors().get($id))
+                                                                    #end
+                                                                    #if ($error3)
+                                                                      bgcolor="#FFCCCC"
+                                                                    #end
+                                                                    >
+                                                                    #if ($error3)
+                                                                      <span class="errMsg">$error3</span><br>
+                                                                    #end
+                                                                    <select id="dashboardId" name="dashboardId" style="width: 250px">
+                                                                        #foreach ($val in $portals)
+                                                                            <option value="${val.id}"
+                                                                                #if(${val.id} == $lDashboardId)
+                                                                                    SELECTED
+                                                                                #end
+                                                                            >${val.name}</option>
+                                                                        #end
+                                                                        </select>
+								</td>
+
+							</tr>
+                            <tr>
+								<td align="right">
+									Choose action type:
+								</td>
+								<td>
+                                                                    <INPUT TYPE=RADIO NAME="clearFavourites" VALUE="yes" #if ($clearFavourites == 'yes') CHECKED #end >Clear all favorites dashboards and set selected as favorites<BR>
+                                                                    <INPUT TYPE=RADIO NAME="clearFavourites" VALUE="no" #if ($clearFavourites == 'no') CHECKED #end>Add selected Dashboard to favorites<BR>
+								</td>
+							</tr>
+							<tr align="right">
+								<td colspan="2">
+                                                                    <div align="center"><input name="confirm" value="Save" type="submit"></div>
+								</td>
+							</tr>
+						</tbody></table>
+			    </form>
+
+    </body>
+</html>
