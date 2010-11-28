@@ -1,3 +1,0 @@
-The value of field #if(${selectedField})
-    <b>${selectedField.name}</b>
-#end will be set to the value of the user's (from <b>${selectedUserField.name}</b> field) <b>$userPropKey</b> property.
