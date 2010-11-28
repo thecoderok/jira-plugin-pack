@@ -1,0 +1,3 @@
+#searcherHeader ($customField)
+    $!value
+#searcherFooter ($customField)
